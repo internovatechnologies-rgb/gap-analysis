@@ -138,27 +138,27 @@ function TestPageContent() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <main className="flex-1 max-w-5xl w-full mx-auto p-8 md:p-12">
-        <div className="bg-blue-50 border border-blue-100 rounded-lg p-6 mb-12 text-center">
-          <h2 className="text-lg font-semibold text-gray-800">
+      <main className="flex-1 max-w-5xl w-full mx-auto p-4 md:p-12">
+        <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 md:p-6 mb-8 md:mb-12 text-center">
+          <h2 className="text-base md:text-lg font-semibold text-gray-800">
             Core Questions (12–15 items, yes/no or multiple-choice)
           </h2>
         </div>
 
-        <div className="space-y-12">
+        <div className="space-y-8 md:space-y-12">
           {domains.map((domain) => (
             <div key={domain.id}>
-              <h3 className="text-[#4E27F0] font-bold tracking-wider uppercase mb-6 text-sm">
+              <h3 className="text-[#4E27F0] font-bold tracking-wider uppercase mb-4 md:mb-6 text-xs md:text-sm">
                 {domain.title}
               </h3>
-              <div className="space-y-6">
+              <div className="space-y-4 md:space-y-6">
                 {domain.questions.map((q) => (
-                  <div key={q.id} className="flex items-center justify-between border-b border-gray-100 pb-6 last:border-0">
-                    <p className="text-gray-800 text-base max-w-3xl">{q.id}. {q.text}</p>
-                    <div className="flex gap-3">
+                  <div key={q.id} className="flex flex-col md:flex-row md:items-center justify-between border-b border-gray-100 pb-4 md:pb-6 last:border-0 gap-4 md:gap-0">
+                    <p className="text-gray-800 text-sm md:text-base max-w-3xl">{q.id}. {q.text}</p>
+                    <div className="flex gap-3 w-full md:w-auto">
                       <button
                         onClick={() => handleAnswer(q.id, true)}
-                        className={`px-6 py-2 rounded border transition-colors ${answers[q.id] === true
+                        className={`flex-1 md:flex-none px-6 py-2 rounded border transition-colors ${answers[q.id] === true
                           ? 'bg-blue-600 text-white border-blue-600'
                           : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'
                           }`}
@@ -167,7 +167,7 @@ function TestPageContent() {
                       </button>
                       <button
                         onClick={() => handleAnswer(q.id, false)}
-                        className={`px-6 py-2 rounded border transition-colors ${answers[q.id] === false
+                        className={`flex-1 md:flex-none px-6 py-2 rounded border transition-colors ${answers[q.id] === false
                           ? 'bg-blue-600 text-white border-blue-600'
                           : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'
                           }`}
@@ -183,15 +183,15 @@ function TestPageContent() {
 
           {/* Optional Question Section */}
           <div>
-            <h3 className="text-[#4E27F0] font-bold tracking-wider uppercase mb-6 text-sm">
+            <h3 className="text-[#4E27F0] font-bold tracking-wider uppercase mb-4 md:mb-6 text-xs md:text-sm">
               OPTIONAL
             </h3>
-            <div className="flex items-center justify-between border-b border-gray-100 pb-6">
-              <p className="text-gray-800 text-base max-w-3xl">{optionalQuestion.id}. {optionalQuestion.text}</p>
-              <div className="flex gap-3">
+            <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-gray-100 pb-4 md:pb-6 gap-4 md:gap-0">
+              <p className="text-gray-800 text-sm md:text-base max-w-3xl">{optionalQuestion.id}. {optionalQuestion.text}</p>
+              <div className="flex gap-3 w-full md:w-auto">
                 <button
                   onClick={() => handleAnswer(optionalQuestion.id, true)}
-                  className={`px-6 py-2 rounded border transition-colors ${answers[optionalQuestion.id] === true
+                  className={`flex-1 md:flex-none px-6 py-2 rounded border transition-colors ${answers[optionalQuestion.id] === true
                     ? 'bg-blue-600 text-white border-blue-600'
                     : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'
                     }`}
@@ -200,7 +200,7 @@ function TestPageContent() {
                 </button>
                 <button
                   onClick={() => handleAnswer(optionalQuestion.id, false)}
-                  className={`px-6 py-2 rounded border transition-colors ${answers[optionalQuestion.id] === false
+                  className={`flex-1 md:flex-none px-6 py-2 rounded border transition-colors ${answers[optionalQuestion.id] === false
                     ? 'bg-blue-600 text-white border-blue-600'
                     : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'
                     }`}
@@ -212,10 +212,10 @@ function TestPageContent() {
           </div>
         </div>
 
-        <div className="mt-16 flex justify-center">
+        <div className="mt-12 md:mt-16 flex justify-center">
           <button
             onClick={handleSubmit}
-            className="bg-[#0D25FF] hover:bg-[#0D25FF]/80 text-white font-bold py-4 px-24 rounded-lg text-lg transition-colors shadow-lg shadow-[#0D25FF]/20"
+            className="w-full md:w-auto bg-[#0D25FF] hover:bg-[#0D25FF]/80 text-white font-bold py-3 md:py-4 px-8 md:px-24 rounded-lg text-base md:text-lg transition-colors shadow-lg shadow-[#0D25FF]/20"
           >
             Submit
           </button>

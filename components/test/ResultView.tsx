@@ -53,7 +53,7 @@ const ResultView = ({ score, answers }: ResultViewProps) => {
 
   return (
     <div className="w-full max-w-5xl mx-auto">
-      <div className={`rounded-3xl p-8 md:p-12 ${score >= 12 ? 'bg-green-500' : 'bg-red-500'} text-white relative overflow-hidden`}>
+      <div className={`rounded-3xl p-6 md:p-12 ${score >= 12 ? 'bg-green-500' : 'bg-red-500'} text-white relative overflow-hidden`}>
         {/* Background decoration */}
         <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
           <svg width="100%" height="100%">
