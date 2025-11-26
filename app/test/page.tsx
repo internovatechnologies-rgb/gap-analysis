@@ -121,7 +121,7 @@ export default function TestPage() {
       }
     }
 
-    // If all validations pass, proceed with submis
+    // If all validations pass, proceed with 
     const score = calculateScore();
     router.push('/test?view=result');
     setIsSubmitted(true);
