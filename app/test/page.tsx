@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import ResultView from '@/components/test/ResultView';
 import { toast } from 'sonner';
@@ -63,7 +62,7 @@ const optionalQuestion = {
   text: 'Are key program handbooks (client rights, privacy, emergency procedures) up-to-date?',
 };
 
-export default function TestPage() {
+function TestPageContent() {
   const [answers, setAnswers] = useState<Record<number, boolean | null>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [startTime, setStartTime] = useState<number | null>(null);
@@ -223,5 +222,13 @@ export default function TestPage() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function TestPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-white flex items-center justify-center">Loading...</div>}>
+      <TestPageContent />
+    </Suspense>
   );
 }
