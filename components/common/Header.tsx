@@ -44,9 +44,9 @@ const Header = ({ subtitle: propSubtitle, action: propAction }: HeaderProps) => 
         </div>
 
         {subtitle && (
-          <div className="hidden md:flex items-center">
+          <div className="flex items-center">
             <div className="h-6 w-px bg-gray-300 mx-2"></div>
-            <span className="text-gray-700 font-medium">{subtitle}</span>
+            <span className="text-gray-700 font-medium text-sm md:text-base">{subtitle}</span>
           </div>
         )}
       </div>

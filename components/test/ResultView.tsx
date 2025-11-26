@@ -52,8 +52,8 @@ const ResultView = ({ score, answers }: ResultViewProps) => {
   if (weaknesses.length === 0) weaknesses.push("No specific weaknesses identified based on answers.");
 
   return (
-    <div className="w-full max-w-5xl mx-auto">
-      <div className={`rounded-3xl p-6 md:p-12 ${score >= 12 ? 'bg-green-500' : 'bg-red-500'} text-white relative overflow-hidden`}>
+    <div className={`w-full max-w-5xl pt-12 mx-auto ${score >= 12 ? 'bg-green-500' : 'bg-red-500'}`}>
+      <div className={`rounded-t-3xl bg-white mt-8 p-6 md:p-12  text-white relative overflow-hidden`}>
         {/* Background decoration */}
         <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
           <svg width="100%" height="100%">
@@ -63,7 +63,7 @@ const ResultView = ({ score, answers }: ResultViewProps) => {
 
         <div className="relative z-10 flex flex-col md:flex-row gap-8 items-start">
           {/* Score Card */}
-          <div className="bg-white rounded-2xl p-6 shadow-lg w-full md:w-1/3 flex flex-col items-center text-center">
+          <div className="bg-white w-full md:w-1/3 flex flex-col items-center text-center">
             <div className={`text-sm uppercase tracking-wider font-bold mb-2 ${riskColor === 'text-green-600' ? 'text-gray-500' : 'text-gray-500'}`}>Score Tier:</div>
             <div className={`text-2xl font-bold mb-6 flex items-center gap-2 ${riskColor}`}>
               <div className={`w-6 h-6 rounded-full ${iconColor} text-white flex items-center justify-center text-xs`}>
@@ -86,7 +86,7 @@ const ResultView = ({ score, answers }: ResultViewProps) => {
           </div>
 
           {/* Content */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg w-full md:w-2/3 text-gray-800">
+          <div className=" mt-3 p-4 w-full md:w-2/3 text-gray-800">
             <h2 className="text-2xl font-bold mb-2">{message}</h2>
             <p className="text-gray-600 mb-8">
               {score >= 12
@@ -112,9 +112,14 @@ const ResultView = ({ score, answers }: ResultViewProps) => {
               </div>
             </div>
 
-            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-colors">
+            <a
+              href="https://calendly.com/tobi-walker-theraptly/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-colors text-center"
+            >
               Analyze your Policy
-            </button>
+            </a>
           </div>
         </div>
       </div>

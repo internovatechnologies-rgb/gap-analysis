@@ -65,7 +65,6 @@ const optionalQuestion = {
 function TestPageContent() {
   const [answers, setAnswers] = useState<Record<number, boolean | null>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [startTime, setStartTime] = useState<number | null>(null);
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -74,12 +73,8 @@ function TestPageContent() {
       setIsSubmitted(true);
     } else {
       setIsSubmitted(false);
-      // Set start time when test page loads (not in result view)
-      if (startTime === null) {
-        setStartTime(Date.now());
-      }
     }
-  }, [searchParams, startTime]);
+  }, [searchParams]);
 
   const handleAnswer = (questionId: number, value: boolean) => {
     setAnswers((prev) => ({
@@ -100,27 +95,18 @@ function TestPageContent() {
     // Get all question IDs (excluding optional)
     const allQuestionIds = domains.flatMap(domain => domain.questions.map(q => q.id));
 
-    // Check if all required questions are answered
-    const unansweredQuestions = allQuestionIds.filter(id => answers[id] === undefined || answers[id] === null);
+    // Count how many questions have been answered
+    const answeredQuestions = allQuestionIds.filter(id => answers[id] !== undefined && answers[id] !== null);
 
-    if (unansweredQuestions.length > 0) {
-      toast.error('Please answer all questions before submitting.');
+    // Check if at least 50% of questions are answered
+    const requiredAnswers = Math.ceil(allQuestionIds.length * 0.5);
+
+    if (answeredQuestions.length < requiredAnswers) {
+      toast.error(`Please answer at least ${requiredAnswers} questions (50%) before submitting. You've answered ${answeredQuestions.length} so far.`);
       return;
     }
 
-    // Check if minimum time has elapsed (3 minutes = 180000 milliseconds)
-    if (startTime) {
-      const elapsedTime = Date.now() - startTime;
-      const threeMinutes = 3 * 60 * 1000; // 3 minutes in milliseconds
-
-      if (elapsedTime < threeMinutes) {
-        const remainingSeconds = Math.ceil((threeMinutes - elapsedTime) / 1000);
-        toast.warning(`Please take your time. You need at least ${remainingSeconds} more seconds to complete the test.`);
-        return;
-      }
-    }
-
-    // If all validations pass, proceed with 
+    // If validation passes, proceed with submission
     const score = calculateScore();
     router.push('/test?view=result');
     setIsSubmitted(true);
@@ -129,7 +115,7 @@ function TestPageContent() {
   if (isSubmitted) {
     return (
       <div className="min-h-screen bg-white flex flex-col">
-        <main className="flex-1 max-w-5xl w-full mx-auto p-8 md:p-12">
+        <main className="flex-1 max-w-5xl w-full mx-auto md:p-12">
           <ResultView score={calculateScore()} answers={answers} />
         </main>
       </div>
